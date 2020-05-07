@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 const dummy = (blogs) => {
   return 1
 }
@@ -23,10 +25,23 @@ const favoriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
-
+  const grouped = _.groupBy(blogs, 'author')
+  const transformed = _.transform(grouped, (result, value, key) => {
+    result.push({ author: key, blogs: value.length })
+  }, [])
+  return _.maxBy(transformed, 'blogs')
 }
 
 const mostLikes = (blogs) => {
+  const grouped = _.groupBy(blogs, 'author')
+  const reduced = _.reduce(grouped, (result, value, key) => {
+    result[key] = value.reduce((accumulator, current) => accumulator + current.likes, 0)
+    return result
+  }, {})
+  const transformed = _.transform(reduced, (result, value, key) => {
+    result.push({ author: key, likes: value })
+  }, [])
+  return _.maxBy(transformed, 'likes')
 
 }
 

@@ -109,7 +109,7 @@ test('delete blog and check status code', async () => {
   expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
 })
 
-test.only('update blog', async () => {
+test('update blog', async () => {
   const blogsAtStart = await helper.blogsInDb()
   const blogToUpdate = blogsAtStart[0]
   const updatedBlog = {
