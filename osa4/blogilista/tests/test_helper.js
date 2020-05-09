@@ -1,7 +1,9 @@
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
-const initialNotes = [
+const initialBlogs = [
   {
     title: 'React patterns',
     author: 'Michael Chan',
@@ -50,8 +52,27 @@ const usersInDb = async () => {
   return users.map(user => user.toJSON())
 }
 
+const addRootUser = async () => {
+  const passwordHash = await bcrypt.hash('sekret', 10)
+  const user = new User({ username: 'root', passwordHash })
+  return await user.save()
+}
+
+const getTokenForRoot = async () => {
+  const user = await User.findOne({ username: 'root' })
+
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  return jwt.sign(userForToken, process.env.SECRET)
+}
+
 module.exports = {
-  initialNotes,
+  initialBlogs,
   blogsInDb,
   usersInDb,
+  addRootUser,
+  getTokenForRoot,
 }
