@@ -89,11 +89,13 @@ const App = () => {
     setBlogs(updatedBlogs)
   }
 
-  const deleteBlog = async (id) => {
-    console.log('delete', id)
-    await blogService.delete_(id)
+  const deleteBlog = async (blog) => {
+    if (!window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      return
+    }
+    await blogService.delete_(blog.id)
     const updatedBlogs = blogs.reduce((acc, current) => {
-      if (current.id !== id) {
+      if (current.id !== blog.id) {
         acc.push(current)
       }
       return acc
@@ -130,7 +132,7 @@ const App = () => {
           key={blog.id}
           blog={blog}
           likeBlog={likeBlog}
-          deleteBlog={deleteBlog}
+          deleteBlog={() => deleteBlog(blog)}
           user={user}
           />
       )}
