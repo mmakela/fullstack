@@ -37,7 +37,9 @@ const App = () => {
   const login = async (credentials) => {
     try {
       const user = await loginService.login(credentials)
-      setUser(user)
+      setTimeout(() => {
+        setUser(user)  // timeout added because of random "React state update on an unmounted component" warning.
+      }, 100)
       blogService.setToken(user.token)
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
     } catch (error) {

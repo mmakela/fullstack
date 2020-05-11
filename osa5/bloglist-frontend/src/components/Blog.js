@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 const Blog = ({ blog, likeBlog, deleteBlog, user }) => {
   const [detailed, setDetailed] = useState(false)
@@ -96,6 +97,13 @@ const BlogForm = ({ addBlog }) => {
       </form>
     </div>
   )
+}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  likeBlog: PropTypes.func.isRequired,
+  deleteBlog: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 }
 
 export { Blog, BlogForm }
