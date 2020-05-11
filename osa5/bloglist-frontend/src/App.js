@@ -53,9 +53,9 @@ const App = () => {
 
   const handleLogout = async () => {
     setNoticeMessage(`${user.name} logged out.`)
-      setTimeout(() => {
-        setNoticeMessage(null)
-      }, 5000)
+    setTimeout(() => {
+      setNoticeMessage(null)
+    }, 5000)
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
     blogService.setToken('')
@@ -121,12 +121,11 @@ const App = () => {
       <h2>blogs</h2>
 
       <Notification error={errorMessage} notice={noticeMessage} />
-      
+
       <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
 
       <Togglable buttonLabel="new note" ref={blogFormRef}>
         <BlogForm addBlog={addBlog} />
-      }
       </Togglable>
 
       {blogs.map(blog =>
@@ -136,7 +135,7 @@ const App = () => {
           likeBlog={likeBlog}
           deleteBlog={() => deleteBlog(blog)}
           user={user}
-          />
+        />
       )}
     </div>
   )

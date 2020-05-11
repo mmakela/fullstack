@@ -13,7 +13,7 @@ const getAll = async () => {
 }
 
 const create = async (payload) => {
-  const config = { 
+  const config = {
     headers: { Authorization: token }
   }
   const response = await axios.post(baseUrl, payload, config)
@@ -26,7 +26,7 @@ const update = async (id, payload) => {
 }
 
 const delete_ = async (id) => {
-  const config = { 
+  const config = {
     headers: { Authorization: token }
   }
   await axios.delete(`${baseUrl}/${id}`, config)
