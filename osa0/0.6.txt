@@ -1,0 +1,18 @@
+selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note over palvelin:
+Palvelin saa HTTP POST -pyynnön.
+Pyyntöön liitetty header Content-Type kertoo palvelimelle, 
+että pyynnön mukana tuleva data on koodattu 
+application/json muotoon.
+
+Palvelin validoi saadun datan. 
+Onnistuneesti validoitu data tallennetaan palvelimelle ja 
+uusi note voitaisiin palauttaa selaimelle 201 statuskoodin kera
+end note
+
+palvelin-->selain: {"message":"note created"}
+
+note over selain:
+selain renderöi uuden muistiinpanon näytölle
+end note
