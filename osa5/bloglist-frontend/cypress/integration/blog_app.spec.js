@@ -54,7 +54,7 @@ describe('Blog app', function() {
         cy.get('.blog-content')
           .should('contain', 'First class tests')
       })
-      
+
       describe('And a blog exists', function() {
         beforeEach(function() {
           cy.createBlog({
@@ -65,30 +65,18 @@ describe('Blog app', function() {
         })
 
         it('It can be liked', function() {
-          cy.get('.blog-content')
-            .contains('First class tests')
-            .find('button')
-            .click()
-          cy.get('.blog-content')
-            .contains('First class tests')
-            .parent()
+          cy.showBlog('First class tests')
+          cy.get('@blog')
             .find('.likes > button')
             .click()
-          cy.get('.blog-content')
-            .contains('First class tests')
-            .parent()
+          cy.get('@blog')
             .find('.likes')
             .should('contain', '1')
         })
 
         it('It can be removed by creator', function() {
-          cy.get('.blog-content')
-            .contains('First class tests')
-            .find('button')
-            .click()
-          cy.get('.blog-content')
-            .contains('First class tests')
-            .parent()
+          cy.showBlog('First class tests')
+          cy.get('@blog')
             .find('.remove-button')
             .click()
           cy.get('.blog-content')
@@ -96,7 +84,6 @@ describe('Blog app', function() {
         })
 
         it('It can not be removed by non-creator', function() {
-          
           const user = {
             username: 'pate',
             name: 'Postimies P.',
@@ -106,13 +93,8 @@ describe('Blog app', function() {
 
           cy.login({ username: 'pate', password: 'pasander' })
 
-          cy.get('.blog-content')
-            .contains('First class tests')
-            .find('button')
-            .click()
-          cy.get('.blog-content')
-            .contains('First class tests')
-            .parent()
+          cy.showBlog('First class tests')
+          cy.get('@blog')
             .find('.remove-button')
             .should('not.be.visible')
         })
