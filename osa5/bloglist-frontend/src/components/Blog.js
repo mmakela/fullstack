@@ -30,20 +30,20 @@ const Blog = ({ blog, likeBlog, deleteBlog, user }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className="blog-content">
       <div>
         {blog.title}
-        <button onClick={toggleDetails}>{buttonLabel}</button>
+        <button className="visibility-button" onClick={toggleDetails}>{buttonLabel}</button>
       </div>
       <div style={showWhenDetails}>{blog.author}</div>
       <div style={showWhenDetails}>{blog.url}</div>
-      <div style={showWhenDetails}>
-        {blog.likes}
+      <div style={showWhenDetails} className="likes">
+        <span>{blog.likes}</span>
         <button onClick={handleLike}>like</button>
       </div>
       <div style={showWhenDetails}>{blog.user.name}</div>
       <div style={showWhenDetailsAndUser}>
-        <button onClick={() => deleteBlog(blog.id)}>remove</button>
+        <button className="remove-button" onClick={() => deleteBlog(blog.id)}>remove</button>
       </div>
     </div>
   )
@@ -96,7 +96,7 @@ const BlogForm = ({ addBlog }) => {
             onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button type="submit">create</button>
+        <button id="create-button" type="submit">create</button>
       </form>
     </div>
   )
