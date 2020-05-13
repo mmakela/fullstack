@@ -1,6 +1,8 @@
 const _ = require('lodash')
+const logger = require('../utils/logger')
 
 const dummy = (blogs) => {
+  logger.info(blogs)
   return 1
 }
 
