@@ -26,35 +26,39 @@ describe('Blog list', () => {
   })
 
   test('in the beginning all except title is invisible', () => {
-    const div1 = component.getByText('React patterns')
-    expect(div1).not.toHaveStyle('display: none')
+    const { getByText } = component
 
-    const div2 = component.getByText('Michael Chan')
-    expect(div2).toHaveStyle('display: none')
-
-    const div3 = component.getByText('https://reactpatterns.com/')
-    expect(div3).toHaveStyle('display: none')
-
-    const div4 = component.getByText('7')
-    expect(div4).toHaveStyle('display: none')
+    expect(getByText('React patterns'))
+      .not
+      .toHaveStyle('display: none')
+    expect(getByText('Michael Chan'))
+      .toHaveStyle('display: none')
+    expect(getByText('https://reactpatterns.com/'))
+      .toHaveStyle('display: none')
+    expect(getByText('7')
+      .closest('div'))
+      .toHaveStyle('display: none')
   })
 
   test('after clicking the button, children are displayed', () => {
-    // component.debug()
     const button = component.getByText('show')
     fireEvent.click(button)
 
-    const div1 = component.getByText('React patterns')
-    expect(div1).not.toHaveStyle('display: none')
+    const { getByText } = component
 
-    const div2 = component.getByText('Michael Chan')
-    expect(div2).not.toHaveStyle('display: none')
-
-    const div3 = component.getByText('https://reactpatterns.com/')
-    expect(div3).not.toHaveStyle('display: none')
-
-    const div4 = component.getByText('7')
-    expect(div4).not.toHaveStyle('display: none')
+    expect(getByText('React patterns'))
+      .not
+      .toHaveStyle('display: none')
+    expect(getByText('Michael Chan'))
+      .not
+      .toHaveStyle('display: none')
+    expect(getByText('https://reactpatterns.com/'))
+      .not
+      .toHaveStyle('display: none')
+    expect(getByText('7')
+      .closest('div'))
+      .not
+      .toHaveStyle('display: none')
   })
 
   test('after clicking a like button twice, button handler function is called twice', () => {
